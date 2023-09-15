@@ -7,6 +7,7 @@ import 'package:programing/theme/color.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../Database/main_database.dart';
+import '../AnswerScreen/AnswerScreen.dart';
 import '../QuestionScreen/questionScreen.dart';
 import '../main.dart';
 
@@ -17,16 +18,20 @@ class Result extends StatefulWidget {
   final int totalQuetion;
   final int level;
   final String subject;
+  final List<String> yourAnswer;
+  List<dynamic> mainData;
 
-  Result({
-    Key? key,
-    required this.score,
-    required this.correctAnswerCount,
-    required this.wrongAnswerCount,
-    required this.totalQuetion,
-    required this.level,
-    required this.subject,
-  }) : super(key: key);
+  Result(
+      {Key? key,
+      required this.score,
+      required this.correctAnswerCount,
+      required this.wrongAnswerCount,
+      required this.totalQuetion,
+      required this.level,
+      required this.subject,
+      required this.mainData,
+      required this.yourAnswer})
+      : super(key: key);
 
   @override
   State<Result> createState() => _ResultState();
@@ -343,6 +348,44 @@ class _ResultState extends State<Result> {
                                 width: 0,
                                 height: 0,
                               ),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Answers(
+                                              mainData: widget.mainData,
+                                              yourAnswer: widget.yourAnswer,
+                                              numberOfQuestions:
+                                                  widget.totalQuetion,
+                                            )));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(155, 82, 215, 1),
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: Icon(
+                                  Icons.task,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Answer",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(155, 82, 215, 1),
+                                  fontSize: 16),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

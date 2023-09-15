@@ -67,12 +67,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     super.initState();
   }
 
+  final name = TextEditingController();
+  final email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final name = TextEditingController();
-    final email = TextEditingController();
+
     return _isLoading
         ? Loader()
         : Scaffold(

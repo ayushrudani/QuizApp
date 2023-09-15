@@ -8,7 +8,7 @@ import 'package:programing/theme/color.dart';
 
 import '../ResultScreen/resultScreen.dart';
 import '../main.dart';
-
+ 
 class OptionList extends StatefulWidget {
   final String optionText;
 
@@ -68,7 +68,7 @@ class _QuestionState extends State<Question> {
   int correctAnswerCount = 0;
   int wrongAnswerCount = 0;
   int score = 0;
-
+  List<String> yourAnswer = [];
   late Timer _timer;
   int _start = 60;
 
@@ -84,6 +84,8 @@ class _QuestionState extends State<Question> {
                     totalQuetion: 20,
                     level: widget.levelNumber,
                     subject: widget.Subject,
+                    mainData: mainData,
+                    yourAnswer: yourAnswer,
                   )));
     } else {
       count++;
@@ -270,6 +272,7 @@ class _QuestionState extends State<Question> {
                       return InkWell(
                         onTap: () {
                           setState(() {
+                            yourAnswer.add(options[index].toString());
                             if (answer.toString() ==
                                 options[index].toString()) {
                               correctAnswerCount++;
@@ -292,6 +295,7 @@ class _QuestionState extends State<Question> {
                     setState(() {
                       _timer.cancel();
                       goNext();
+                      yourAnswer.add("none");
                     });
                   },
                   child: Container(
